@@ -12,7 +12,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       const existingUser = await db
         .select()
         .from(users)
-        .where(eq(users.id, user.id))
+        .where(eq(users.email, user.email))
         .execute();
 
       // 2. If not, create them
@@ -20,7 +20,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         await db.insert(users).values({
           id: user.id, // Google's ID
           name: user.name || "Anonymous", // Fallback for missing names
-          // email: user.email, // Uncomment if adding email later
+          email: user.email || "",
+          profileImage: user.image || null,
         });
       }
 
