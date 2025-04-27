@@ -8,7 +8,7 @@ type Props = {
 };
 
 export default async function StartupDetailsPage({ params }: Props) {
-  const { id } = params;
+  const { id } = await params;
 
   // Fetch the startup
   const startup = await db
@@ -24,7 +24,8 @@ export default async function StartupDetailsPage({ params }: Props) {
   return (
     <>
       <div className="max-w-4xl text-black mx-auto p-6 bg-white rounded-2xl shadow-lg mt-10">
-        <h1 className="text-4xl font-bold mb-6 text-center">{startup.title}</h1>
+        <p className="text-center bg-amber-500 py-2 my-3 rounded-lg text-white font-semibold w-40 mx-auto">{new Date(startup.createdAt).toDateString()}</p>
+        <h1 className="text-5xl font-bold mb-6 text-center">{startup.title}</h1>
 
         {startup.image && (
           <div className="w-full h-96 relative mb-6">
@@ -37,12 +38,12 @@ export default async function StartupDetailsPage({ params }: Props) {
           </div>
         )}
 
-        <p className="text-gray-700 text-lg leading-relaxed mb-6">
+        <p className="text-gray-700 font-semibold text-xl leading-relaxed mb-6">
           {startup.description}
         </p>
 
         <div className="bg-gray-100 p-4 rounded-xl">
-          <h2 className="text-xl font-semibold mb-2">Pitch</h2>
+          <h2 className="text-3xl font-bold mb-2">Pitch Details: </h2>
           <p className="text-gray-800">{startup.pitch}</p>
         </div>
       </div>

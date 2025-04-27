@@ -23,7 +23,9 @@ export default async function SignIn() {
     >
       <button type="submit" className="cursor-pointer">Sign Out</button>
     </form>
-    <Image src={user.image || ""} width={30} height={30} alt={user.name || ""} className="rounded-full" />
+    <Link href={""}>
+      <Image src={user.image || ""} width={30} height={30} alt={user.name || ""} className="rounded-full" />
+    </Link>
     </div>
   ) : (
     <form

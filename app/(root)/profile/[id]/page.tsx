@@ -5,7 +5,7 @@ import { StartupCard } from "@/components/StartupCard";
 import Image from "next/image";
 
 export default async function ProfilePage({ params }: { params: { id: string } }) {
-  const { id: userId } = params;
+  const { id: userId } = await params;
 
   const user = await db
     .select()

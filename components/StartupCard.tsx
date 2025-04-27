@@ -14,13 +14,16 @@ type Startup = {
 }
 
 export function StartupCard({ startup }: { startup: Startup }) {
+  const  truncatedDescription = startup.description.length > 66
+    ? `${startup.description.substring(0, 77)}...`
+    : startup.description
   return (
     <>
       <div
-        className="border-5 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+        className="border-5 p-2 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow hover:border-pink-600 duration-700"
       >
         <div className="flex justify-between items-center m-2">
-          <Link href={`/profile/${startup.authorId}`} className="hover:underline">{startup.authorName || "Anonymous"}</Link>
+          <Link href={`/profile/${startup.authorId}`} className="hover:underline text-xl font-bold">{startup.authorName || "Anonymous"}</Link>
           <Link href={`/profile/${startup.authorId}`}>
             {startup.authorImage && (
               <Image
@@ -46,7 +49,7 @@ export function StartupCard({ startup }: { startup: Startup }) {
         )}
         <div className="p-4">
           <h3 className="text-xl font-bold mb-2">{startup.title}</h3>
-          <p className="text-gray-600 mb-4">{startup.description}</p>
+          <p className="text-gray-400 mb-4">{truncatedDescription}</p>
           <div className="flex justify-between items-center">
             <span className="text-xs text-green-500">
               {new Date(startup.createdAt).toDateString()}

@@ -1,6 +1,6 @@
 import { db } from "@/lib/db-edge";
 import { startUps, users } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { eq, desc } from "drizzle-orm";
 
 import { StartupCard } from "@/components/StartupCard";
 
@@ -18,7 +18,7 @@ export default async function Home() {
     })
     .from(startUps)
     .leftJoin(users, eq(startUps.userId, users.id))
-    .orderBy(startUps.createdAt)
+    .orderBy(desc(startUps.createdAt))
 
   return (
     <div className="">
@@ -33,7 +33,6 @@ export default async function Home() {
           Competitions.
         </p>
 
-        {/* <SearchForm query={query} /> */}
         <input
           type="search"
           placeholder="Search Startups"
@@ -41,7 +40,7 @@ export default async function Home() {
         />
       </section>
       <section className="p-3 bg-white text-black">
-        <h2 className="text-2xl font-bold">All Startups</h2>
+        <h2 className="text-3xl font-bold my-5">All Startups</h2>
         {/* display the startups */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {startups.map((startup) => (
