@@ -8,28 +8,43 @@ type Props = {
 };
 
 export default async function StartupDetailsPage({ params }: Props) {
-    const { id } = params
+  const { id } = params;
 
-    // Fetch the startup
+  // Fetch the startup
   const startup = await db
-  .select()
-  .from(startUps)
-  .where(eq(startUps.id, id))
-  .execute()
-  .then(res => res[0]); // Only take first result
+    .select()
+    .from(startUps)
+    .where(eq(startUps.id, id))
+    .execute()
+    .then((res) => res[0]);
 
-if (!startup) {
-  return <div>Startup not found</div>;
-}
+  if (!startup) {
+    return <div>Startup not found</div>;
+  }
   return (
     <>
-      <div>
-      <div className="p-6">
-      <h1 className="text-3xl font-bold">{startup.title}</h1>
-      {startup.image && <Image src={startup.image} width={400} height={400} alt={startup.title} className="my-4" />}
-      <p className="text-lg">{startup.description}</p>
-      <p className="mt-4">{startup.pitch}</p>
-    </div>
+      <div className="max-w-4xl text-black mx-auto p-6 bg-white rounded-2xl shadow-lg mt-10">
+        <h1 className="text-4xl font-bold mb-6 text-center">{startup.title}</h1>
+
+        {startup.image && (
+          <div className="w-full h-96 relative mb-6">
+            <Image
+              src={startup.image}
+              fill
+              alt={startup.title}
+              className="object-cover rounded-2xl"
+            />
+          </div>
+        )}
+
+        <p className="text-gray-700 text-lg leading-relaxed mb-6">
+          {startup.description}
+        </p>
+
+        <div className="bg-gray-100 p-4 rounded-xl">
+          <h2 className="text-xl font-semibold mb-2">Pitch</h2>
+          <p className="text-gray-800">{startup.pitch}</p>
+        </div>
       </div>
     </>
   );

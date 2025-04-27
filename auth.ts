@@ -8,34 +8,41 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [Google],
   callbacks: {
     async signIn({ user, account, profile }) {
-      // 1. Check if user exists in your DB
       const existingUser = await db
         .select()
         .from(users)
         .where(eq(users.email, user.email))
         .execute();
 
-      // 2. If not, create them
       if (existingUser.length === 0) {
         await db.insert(users).values({
-          id: user.id, // Google's ID
-          name: user.name || "Anonymous", // Fallback for missing names
+          id: globalThis.crypto.randomUUID(),
+          name: user.name || "Anonymous",
           email: user.email || "",
           profileImage: user.image || null,
         });
       }
 
-      return true; // Allow sign-in
+      return true;
     },
     async session({ session, token }) {
-      // 3. Attach user ID to the session (useful for frontend)
-      if (session.user) {
-        session.user.id = token.sub; // Google's ID
+      if (session.user && token.sub) {
+        session.user.id = token.sub; // database uuid
       }
       return session;
     },
-    async jwt({ token }) {
-      // 4. Include user ID in JWT token
+    async jwt({ token, account, profile }) {
+      if(account && profile?.name) {
+        const dbUser = await db
+          .select()
+          .from(users)
+          .where(eq(users.email, profile.email))
+          .execute()
+
+          if(dbUser.length > 0) {
+            token.sub = dbUser[0].id
+          }
+      }
       return token;
     },
   },

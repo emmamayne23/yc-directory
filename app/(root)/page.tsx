@@ -12,7 +12,7 @@ export default async function Home() {
       description: startUps.description, 
       image: startUps.image, 
       createdAt: startUps.createdAt, 
-      // user fields
+      authorId: users.id,
       authorName: users.name,
       authorImage: users.profileImage 
     })
@@ -40,7 +40,7 @@ export default async function Home() {
           className=" mt-5 py-4 pl-10 md:mt-7 md:w-2xl lg:w-3xl text-xl font-bold text-gray-700 bg-white rounded-4xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black focus:border-black"
         />
       </section>
-      <section className="p-3">
+      <section className="p-3 bg-white text-black">
         <h2 className="text-2xl font-bold">All Startups</h2>
         {/* display the startups */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
