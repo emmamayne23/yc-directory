@@ -1,4 +1,4 @@
-# YC Directory Next.js Application
+# YC Directory Startup Platform.
 
 A modern web application built with Next.js 15, featuring authentication, database integration, and a sleek user interface.
 
