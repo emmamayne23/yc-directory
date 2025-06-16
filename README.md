@@ -5,9 +5,12 @@ A modern web application built with Next.js 15, featuring authentication, databa
 ## 📸 Screenshots
 
 <!-- Add your screenshots here -->
-![Home Page](/public/screenshots/home.png)
-![Authentication Page](/public/screenshots/auth.png)
-![Dashboard](/public/screenshots/dashboard.png)
+Home Page ![Screenshot 2025-06-15 200456](https://github.com/user-attachments/assets/807fc3c6-05c9-4e39-a0ca-867b20ed75a7)
+
+Startups section ![Screenshot 2025-06-15 200513](https://github.com/user-attachments/assets/23192865-0ba6-431f-8b27-d53d46bbca2e)
+
+Startup details ![Screenshot 2025-06-15 200538](https://github.com/user-attachments/assets/1ef68ab3-e60a-471e-9c55-2edc21a6dd26)
+
 
 ## 🚀 Features
 
